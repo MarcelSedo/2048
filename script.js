@@ -35,12 +35,30 @@ function setGame () {
             document.getElementById("board").append(tile);
         }
     }
+    //25 dávame sem funkciu dvakrát, pretože na začiatku potrebujeme aspoň dve dvojky
+    setTwo();
+    setTwo();
+}
+//24 pridáva sa funkcia prázdneho tilu a pridávame tam random tile
+function hasEmptyTile() {
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns; c++) {
+            if (board[r][c] == 0) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 //22 - aby sme mohli začať hru, potrebujeme aspoň dva dvojkové tily
 function setTwo() {
+    //23 pridávame podmienku, keď už nebude prázdne miesto v políčkach
+    if (!hasEmptyTile()) {
+        return; //vracia ak nič nenájde a nespustí sa funkcia dole, ale tá, ktorú pridávam hore nad setTwo
+    }
 
     let found = false;
-    while (found) {
+    while (!found) {
         //random r, c value
         let r = Math.floor(Math.random() * rows) //0-1 x 4 --> číslo medzi 0 až 3 (pretože floor)
         let c = Math.floor(Math.random() * columns)
@@ -74,17 +92,23 @@ function updateTile(tile, num) {
 document.addEventListener("keyup", (e) => {
     if(e.code == "ArrowLeft"){
         slideLeft();
+        setTwo();//p27 ridávame dva tily vždy keď pohneme myšou do každej šípky
     }
     //17 kopírujeme funkciu vyššie a využívame ju pre pohyb vpravo
     else if(e.code == "ArrowRight"){
         slideRight();
+        setTwo();
     } 
     else if(e.code == "ArrowUp"){
         slideUp();
+        setTwo();
     }
     else if(e.code == "ArrowDown"){
         slideDown();
+        setTwo();
     }
+    //28 pridávame skóre
+    document.getElementById("score").innerText = score;
 })
 //11funkcia ktorá vytvára prázdny - táto funkcia vytvára nové pole - riadok - a ráta so všetkými číslami, ktoré nie sú nulou
 function filterZero(row) {
