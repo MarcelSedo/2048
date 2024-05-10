@@ -10,13 +10,20 @@ window.onload = function(){
 }
 // 3 krok - nastavenie hodnôt boardu
 function setGame () {
-    //8 - implementovanie logiky ako s čísla tvoria
+    //8 - implementovanie logiky ako sa čísla tvoria
+    // 21 vynulovaný boaard na začiatku
     board = [
-        [2, 2, 2, 2],
-        [2, 2, 2, 2],
-        [4, 4, 8, 8],
-        [4, 4, 8, 8],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
     ]
+    /*board = [
+        [2, 2, 2, 2],
+        [2, 2, 2, 2],
+        [4, 4, 8, 8],
+        [4, 4, 8, 8],
+    ]*/
     for (let r = 0; r <rows; r++){
         for (let c = 0; c < columns; c++){
             // 4 krok vytvorenie tagu div kde id = "0-0"
@@ -29,6 +36,25 @@ function setGame () {
         }
     }
 }
+//22 - aby sme mohli začať hru, potrebujeme aspoň dva dvojkové tily
+function setTwo() {
+
+    let found = false;
+    while (found) {
+        //random r, c value
+        let r = Math.floor(Math.random() * rows) //0-1 x 4 --> číslo medzi 0 až 3 (pretože floor)
+        let c = Math.floor(Math.random() * columns)
+
+        if (board[r][c] === 0){
+            board[r][c] = 2
+            let tile =document.getElementById(r.toString() + "-" + c.toString());
+            tile.innerText = "2";
+            tile.classList.add("x2");
+            found = true;
+        }
+    }
+}
+
 // 6 clearovanie tilov potom, čo sa zmenia tily
 function updateTile(tile, num) {
     tile.innerText = "";
@@ -55,6 +81,9 @@ document.addEventListener("keyup", (e) => {
     } 
     else if(e.code == "ArrowUp"){
         slideUp();
+    }
+    else if(e.code == "ArrowDown"){
+        slideDown();
     }
 })
 //11funkcia ktorá vytvára prázdny - táto funkcia vytvára nové pole - riadok - a ráta so všetkými číslami, ktoré nie sú nulou
@@ -123,12 +152,34 @@ function slideUp() {
     for(let c = 0; c < columns; c++) {
         let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
         row = slide(row);
-        board[0][c] = row[0];
-        board[1][c] = row[1];
-        board[2][c] = row[2];
-        board[3][c] = row[3];
+        //board[0][c] = row[0];
+        //board[1][c] = row[1];
+        //board[2][c] = row[2];
+        //board[3][c] = row[3];
         //19 kopírujeme funkciu zhora a meníme columns za row
         for (let r = 0; r < rows; r++) {
+            board[r][c] = row[r];
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
+            let num = board[r][c];
+            updateTile(tile, num);
+        }
+    }
+}
+
+//20 duplikujeme funkciu hore a prerábame ju na funkciu nadol
+function slideDown() {
+    for(let c = 0; c < columns; c++) {
+        let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
+        row.reverse();
+        row = slide(row);
+        row.reverse();
+        //board[0][c] = row[0];
+        //board[1][c] = row[1];
+        //board[2][c] = row[2];
+        //board[3][c] = row[3];
+        //19 kopírujeme funkciu zhora a meníme columns za row
+        for (let r = 0; r < rows; r++) {
+            board[r][c] = row[r];
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
             updateTile(tile, num);
