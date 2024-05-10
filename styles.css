@@ -1,3 +1,90 @@
 body {
-    
+    font-family: 'Common Pixel', sans-serif;
+    text-align: center;
+    color: #05d9e8;
+    text-shadow: 2px 2px 2px #d1f7ff;
+    background-color: #005678;
 }
+hr {
+    width: 500px;
+    background-color: #1e0f1d;
+}
+#board {
+    width: 400px;
+    height: 400px;
+    background-color: #54295c;
+    border: 6px solid #1e0f1d;
+    box-shadow: 2px 2px 3px 2px #05d9e8;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tile {
+    width: 90px;
+    height: 90px;
+    border: 5px solid #05d9e8;
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x2 {
+    background-color: #d1f7ff;
+    color: #54295c;
+}
+
+.x4 {
+    background-color: #8ae8fb;
+    color: #54295c;
+}
+.x8 {
+    background-color: #21a2bb;
+    color: #54295c;
+}
+.x16 {
+    background-color: #095665;
+    color: #881e9b;
+}
+
+.x32 {
+    background-color: #3891ff;
+    color: #54295c;
+}
+
+.x64 {
+    background-color: #136ddc;
+    color: #54295c;
+}
+.x128 {
+    background-color: #064b9e;
+    color: #802291;
+}
+.x256 {
+    background-color: #022f67;
+    color: #802291;
+}
+.x512 {
+    background-color: #6a6aff;
+    color: #5a2663;
+}
+
+.x1024 {
+    background-color: #3838ee;
+    color: #5a2663;
+}
+
+.x2048 {
+    background-color: #0303c5;
+    color: #5a2663;
+}
+.x4096 {
+    background-color: #000065;
+    color: #872099;
+}
+.x8192 {
+    background-color: #000065;
+    color: #872099;
+}
+
