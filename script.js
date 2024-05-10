@@ -50,6 +50,30 @@ document.addEventListener("keyup", (e) =>{
         slideLeft();
     }
 })
+//11funkcia ktorá vytvára prázdny - táto funkcia vytvára nové pole - riadok - a ráta so všetkými číslami, ktoré nie sú nulou
+function filterZero(row) {
+    return row.filter(num => num !=0);
+}
+
+//10 nastavujeme slide vo funkcii 
+function slide(){
+    //[0, 2, 2, 2] filtrujeme row
+    row - filterZero(row); //zbavuje sa núl
+
+    //12 spojený so započítavaním
+    for(let i =0; i < row.length; i++){
+        //sledujeme všetky dvojky
+        if(row[i] == row[i+1]) {
+            row[i] *= 2;
+            row[i+1] = 0;
+            score += row[i];
+        } // 2+2+2 - 4 + 0 + 2
+    }
+    //13 vraciame nulu späť
+    row = filterZero(row);
+
+}
+
 //9 nastavujeme prepočet a rozpoznanie a presuny čísel, s ktorými hrá hráč
 function slideLeft(){
     for(let r = 0; r < rows; r++) {
