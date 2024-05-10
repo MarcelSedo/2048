@@ -45,9 +45,13 @@ function updateTile(tile, num) {
     }
 }
 //8 nastavujeme pohyb po stránke
-document.addEventListener("keyup", (e) =>{
-    if(e.code == "ArrowLedt"){
+document.addEventListener("keyup", (e) => {
+    if(e.code == "ArrowLeft"){
         slideLeft();
+    }
+    //17 kopírujeme funkciu vyššie a využívame ju pre pohyb vpravo
+    else if(e.code == "ArrowRight"){
+        slideRight();
     }
 })
 //11funkcia ktorá vytvára prázdny - táto funkcia vytvára nové pole - riadok - a ráta so všetkými číslami, ktoré nie sú nulou
@@ -72,7 +76,7 @@ function slide(row){
     //13 odstraňujeme nulu
     row = filterZero(row);//4,2
     // 14  pridávame nulu
-    while (row.length < column){
+    while (row.length < columns){
         row.push(0); // 4,2,0,0
     }
     return row; 
@@ -86,11 +90,34 @@ function slideLeft(){
         row = slide(row);
         board[r] =row;
 
-        //15
+        //15 columns
         for (let c = 0; c < columns; c++) {
-            let tile = document.getElementById(r.toString() + "-" c.toString());
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
             updateTile(tile, num);
         }
+    }
+}
+//16 kopírujeme funkciu hore a upravujeme ju na využitie napravo - pridávame funkciu reverse - obraciame tým poradie na dvoch miestach pri pohybe aj započítaní
+function slideRight(){
+    for(let r = 0; r < rows; r++) {
+        let row = board[r];
+        row.reverse();
+        row = slide(row);
+        row.reverse();
+        board[r] =row;
+
+        for (let c = 0; c < columns; c++) {
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
+            let num = board[r][c];
+            updateTile(tile, num);
+        }
+    }
+}
+
+//ideme transportovať row zľava doprava a využiť ich pre stĺpce a pohyb zhora a nadol
+function slideUp() {
+    for(let c = 0; c < columns; c++) {
+        let row = [board[0][c], board[1][c], board[2][c], board [3][c]]
     }
 }
