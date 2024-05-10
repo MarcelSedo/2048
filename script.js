@@ -56,7 +56,7 @@ function filterZero(row) {
 }
 
 //10 nastavujeme slide vo funkcii 
-function slide(){
+function slide(row){
     //[0, 2, 2, 2] filtrujeme row
     row - filterZero(row); //zbavuje sa núl
 
@@ -69,9 +69,14 @@ function slide(){
             score += row[i];
         } // 2+2+2 - 4 + 0 + 2
     }
-    //13 vraciame nulu späť
-    row = filterZero(row);
-
+    //13 odstraňujeme nulu
+    row = filterZero(row);//4,2
+    // 14  pridávame nulu
+    while (row.length < column){
+        row.push(0); // 4,2,0,0
+    }
+    return row; 
+    /*ideme cez rowslidujeme ho, dávame ho späť do board, modifikujeme board*/ 
 }
 
 //9 nastavujeme prepočet a rozpoznanie a presuny čísel, s ktorými hrá hráč
@@ -80,5 +85,12 @@ function slideLeft(){
         let row = board[r];
         row = slide(row);
         board[r] =row;
+
+        //15
+        for (let c = 0; c < columns; c++) {
+            let tile = document.getElementById(r.toString() + "-" c.toString());
+            let num = board[r][c];
+            updateTile(tile, num);
+        }
     }
 }
