@@ -54,6 +54,7 @@ function hasEmptyTile() {
 function setTwo() {
     //23 pridávame podmienku, keď už nebude prázdne miesto v políčkach
     if (!hasEmptyTile()) {
+        alert("Game Over")
         return; //vracia ak nič nenájde a nespustí sa funkcia dole, ale tá, ktorú pridávam hore nad setTwo
     }
 
