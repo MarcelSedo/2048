@@ -54,8 +54,14 @@ function hasEmptyTile() {
 function setTwo() {
     //23 pridávame podmienku, keď už nebude prázdne miesto v políčkach
     if (!hasEmptyTile()) {
-        alert("Game Over")
+        let over = document.createElement("h2")
+        over.textContent = "GAME OVER"
+        document.querySelector("h2").appendChild(over);
+        setTimeout(function(){
+            location.reload();
+        }, 2000);
         return; //vracia ak nič nenájde a nespustí sa funkcia dole, ale tá, ktorú pridávam hore nad setTwo
+        
     }
 
     let found = false;
@@ -110,6 +116,7 @@ document.addEventListener("keyup", (e) => {
     }
     //28 pridávame skóre
     document.getElementById("score").innerText = score;
+    //31 vypíname funkcionalitu stránky pri GAME over
 })
 //11funkcia ktorá vytvára prázdny - táto funkcia vytvára nové pole - riadok - a ráta so všetkými číslami, ktoré nie sú nulou
 function filterZero(row) {
